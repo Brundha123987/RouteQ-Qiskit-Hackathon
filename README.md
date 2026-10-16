@@ -1,89 +1,106 @@
-# RouteQ: Quantum-assisted emergency route screening
 
-**A small Qiskit hackathon prototype** exploring how a QAOA-style circuit can encode a constrained route-selection problem.
 
-> Important: RouteQ is an educational simulation with synthetic example values. It is not a live navigation, emergency-dispatch, or safety system. It does not claim quantum advantage or that results came from quantum hardware.
+# RouteQ – Quantum-Assisted Emergency Route Screening
 
-## Problem
-During an emergency, responders may need to choose one route from several alternatives while balancing hazard exposure and travel time. This prototype demonstrates how a tiny binary optimization problem can be represented as a QUBO and explored with a quantum circuit.
+## Team Members
+- [Harshitha S]
+- [Brundha K Gowda]
+- [Chandana B C]
 
-## What makes this project distinctive
-Rather than a generic coin toss or entanglement demo, RouteQ connects a Qiskit circuit to a recognizable emergency logistics scenario. The project makes the constraint explicit (select exactly one route), shows measurement outcomes, and discusses invalid solutions and limitations. We cannot claim no one has ever built a similar idea; the specific framing and experiment are our prototype.
 
-## Model
-Three qubits represent three candidate routes:
-- `q0` = Route A
-- `q1` = Route B
-- `q2` = Route C
+## About the Project
 
-For bitstring `x`, the objective is:
+During an emergency, choosing a suitable route can be difficult because the shortest route may not always be the best option. Factors such as route cost and risk also need to be considered.
 
-`C(x) = sum(risk_i * x_i) + P * (sum(x_i) - 1)^2`
+RouteQ is a Qiskit-based project that explores how quantum computing can be used for emergency route screening. It uses a quantum circuit to demonstrate the concept and examines the measurement results along with route-related cost information.
 
-The penalty `P=8` discourages selecting zero or multiple routes. The cost unitary applies phases `exp(-i * gamma * C(x))`; the mixer applies `RX(2*beta)` to each qubit. Hadamard gates initialize a uniform superposition. Measurement samples candidate bitstrings.
+This project is a prototype developed to understand the possible use of quantum computing in route selection. It is not intended to replace real-time navigation systems.
 
-This is a compact QAOA-style demonstration with fixed illustrative parameters, not a parameter-optimized production solver. The chosen cost uses risk score as the objective; travel time is shown as context but not yet optimized jointly.
+## Tools and Technologies
+- Python
+- Qiskit
+- Jupyter Notebook
+- Matplotlib
 
-## Repository
-- `routeq.py` — runnable Python demo and Qiskit circuit.
-- `RouteQ_Hackathon.ipynb` — notebook version with explanation, circuit drawing, counts, and chart.
-- `requirements.txt` — dependencies.
-- `evidence/` — project/circuit overview and illustrative sample-output reference.
+## Project Files
 
-## Setup
-Python 3.10+ recommended.
+- `routeq.py` – Main Python program.
+- `RouteQ_Hackathon.ipynb` – Jupyter Notebook containing the implementation and outputs.
+- `requirements.txt` – List of Python dependencies.
+- `routeq_circuit.png` – Quantum circuit diagram.
+- `routeq_measurement_graph.png` – Measurement graph.
+- `evidence/` – Contains the supporting project diagrams and evidence.
 
-### Windows (PowerShell)
-```powershell
-py -m venv .venv
-.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-python routeq.py
+## Installation
+
+Make sure Python is installed on your computer. Git is required only if you want to clone the project from GitHub.
+
+### 1. Download the project
+
+Clone the repository using:
+
+```bash
+git clone https://github.com/YOUR-USERNAME/RouteQ-Qiskit-Hackathon.git
+cd RouteQ-Qiskit-Hackathon
 ```
 
-### macOS/Linux
+Replace `YOUR-USERNAME` with your GitHub username. If you have already downloaded the project, open CMD in the project folder instead.
+
+### 2. Create a virtual environment
+
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-pip install -r requirements.txt
+python -m venv .venv
+```
+
+For Windows CMD, activate it using:
+
+```cmd
+.venv\Scripts\activate.bat
+```
+
+### 3. Install the required packages
+
+```bash
 python -m pip install -r requirements.txt
+```
+
+## Running the Project
+
+### Run the Python program
+
+After activating the virtual environment, execute:
+
+```bash
 python routeq.py
 ```
 
-### Run in Jupyter
+### Run the Jupyter Notebook
+
+Start Jupyter Notebook with:
+
 ```bash
-jupyter notebook RouteQ_Hackathon.ipynb
+python -m jupyter notebook
 ```
-Run all cells from top to bottom. The notebook draws the circuit and plots measurement counts.
 
-## How to interpret the output
-- The eight basis states are all 3-bit strings.
-- Valid route choices are `001` (A), `010` (B), and `100` (C).
-- States with zero or multiple selected routes receive a penalty.
-- Counts are stochastic and can vary with shot count/parameters.
-- The lowest-risk feasible route in this toy input is Route B (risk 1.0), even though it has a longer illustrative ETA.
+Open `RouteQ_Hackathon.ipynb` in the browser and run the cells using **Run → Run All Cells**. The notebook displays the implementation and its outputs.
 
-## Evidence policy
-Regenerate the circuit drawing and output chart by running the notebook in your environment. Any screenshot submitted should be captured from your actual run. The files in `evidence/` are a conceptual diagram and a reference illustration, not proof of an IBM Quantum hardware run.
+## Understanding the Output
 
-## Suggested team presentation (2 minutes)
-1. **Problem (20 s):** emergency routing involves trade-offs and constraints.
-2. **Encoding (30 s):** one qubit per route; a penalty enforces exactly one route.
-3. **Circuit (30 s):** H initialization, diagonal cost phase, RX mixer, measurement.
-4. **Results (25 s):** compare sampled states and objective values; note invalid outcomes.
-5. **Limitations (15 s):** synthetic data, tiny search space, fixed parameters, no quantum advantage claim.
+The project includes a quantum circuit diagram and a measurement graph to help explain the circuit and its results.
 
-## Improvements if time permits
-- Add travel time as a weighted term with a clearly explained trade-off.
-- Sweep `gamma` and `beta` and compare average objective against random sampling.
-- Add noise to demonstrate robustness limits.
-- Scale only after validating the tiny model and report classical baselines honestly.
+- **Quantum circuit:** Shows the quantum operations used in the implementation.
+- **Measurement results:** Show the outcomes recorded when the circuit is executed.
+- **Measurement graph:** Presents the measurement results visually.
+- **Route-related costs:** Help illustrate the route-screening concept used in the project.
 
-## Sources and acknowledgements
-- RV University, *Qiskit Quantum Computing Hackathon — Challenge Brief, IBM Qiskit Fall Fest 2026* (team-provided PDF).
-- Qiskit documentation: https://quantum.cloud.ibm.com/docs/
-- Qiskit quickstart: https://quantum.cloud.ibm.com/docs/en/guides/quick-start
+The results depend on the implementation and its inputs. They demonstrate the project concept rather than confirming the safety of a real-world emergency route.
 
-The circuit structure and scenario are an educational project implementation. If code or tutorial material is adapted, acknowledge the exact source and describe your changes before submission.
+## Future Scope
+
+The project could be extended by adding real traffic information, more route constraints, and comparisons with classical route-selection methods. Testing with realistic route data would also help evaluate its usefulness.
+
+## Conclusion
+
+RouteQ gave us an opportunity to explore Qiskit and understand how quantum circuits and measurement results can be used in a route-screening prototype. It provides a starting point for further work on quantum-assisted route selection.
+
+
