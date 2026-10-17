@@ -36,7 +36,7 @@ This project demonstrates the concepts of quantum circuits, simulation, measurem
 
 Live Demo
 
-RouteQ Emergency Dashboard · Streamlit
+(https://routeq-qiskit-hackathon-nk8mbyxwraewlntdhkjuch.streamlit.app/)
 
 The interactive dashboard demonstrates route selection, simulation results, and classical comparison. The application uses a classical simulator and illustrative route data; it is not a real-time navigation system.
 
