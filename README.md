@@ -34,6 +34,13 @@ RouteQ is a Qiskit-based educational prototype that explores how quantum computi
 
 This project demonstrates the concepts of quantum circuits, simulation, measurement, and classical comparison. It is not intended to replace real-time navigation systems or guarantee the safety of an emergency route.
 
+Live Demo
+
+RouteQ Emergency Dashboard · Streamlit
+
+The interactive dashboard demonstrates route selection, simulation results, and classical comparison. The application uses a classical simulator and illustrative route data; it is not a real-time navigation system.
+
+
 ## Tools and Technologies
 
 - Python
